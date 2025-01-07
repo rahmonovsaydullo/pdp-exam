@@ -1,18 +1,68 @@
-
-#main{
-    display: flex;
-    flex-direction: column !important;
-    flex-wrap: wrap !important;
-    gap: 30px;
+.container{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
 }
 
-.box{
-   width: 320px;
+.login-from{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: center;
 }
 
-img{
-    width: 300px;
-    height: 200px;
-    /* object-fit: cover; */
+
+.hide-questions{
+  display: none;
 }
 
+#main {
+  display: flex;
+  flex-direction: column !important;
+  flex-wrap: wrap !important;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+}
+
+img {
+  width: 300px;
+  height: 200px;
+  object-fit: cover;
+}
+
+.capital-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.option {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.option:hover {
+  background-color: #f0f0f0;
+}
+
+.option.correct {
+  background-color: #4caf50; /* Green */
+  color: white;
+}
+
+.option.incorrect {
+  background-color: #f44336; /* Red */
+  color: white;
+}
