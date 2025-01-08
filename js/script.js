@@ -3,7 +3,7 @@ const startQuizBtn = document.getElementById("start-quiz");
 const userName = document.getElementById("login-input");
 const loginBtn = document.getElementById("login-btn");
 
-let time = 5; // Timer duration
+let time = 15; // Timer duration
 let questionIndex = 0; // Track the current question
 let questionNumber = 1; // Track the question number
 let userScore = 0; // User score
@@ -18,8 +18,8 @@ const fetchCountries = async () => {
     const resData = response.data;
 
     if (totalQuestions <= 0) {
-      results()
-      return
+      results();
+      return;
     }
     totalQuestions--;
 
@@ -83,6 +83,7 @@ const fetchCountries = async () => {
         if (option.textContent.trim() === correctAnswer) {
           option.classList.add("correct");
           userScore++;
+          localStorage.setItem("userScore", userScore);
         } else {
           option.classList.add("incorrect");
 
@@ -110,11 +111,17 @@ const startTimer = (correctAnswer, optionElements) => {
   const timerDisplay = document.getElementById("timer");
   timerDisplay.innerText = timeLeft;
 
+  const updateTimer = () => {
+    timerDisplay.innerText = timeLeft < 10 ? `0${timeLeft}` : timeLeft;
+  };
+
+  updateTimer();
   timerInterval = setInterval(() => {
     timeLeft--;
-    timerDisplay.textContent = timeLeft;
+    updateTimer();
 
     if (timeLeft <= 0) {
+      timeLeft < 10 ? timerDisplay.textContent + "0" : timerDisplay.textContent;
       clearInterval(timerInterval);
       optionElements.forEach((option) => {
         if (option.textContent.trim() === correctAnswer) {
@@ -131,12 +138,14 @@ const startTimer = (correctAnswer, optionElements) => {
 
 startQuizBtn.addEventListener("click", () => {
   fetchCountries();
-  startQuizBtn.classList.add('hide')
+  startQuizBtn.classList.add("hide");
 });
 
-
-function results (){
-  main.innerHTML=`
+function results() {
+  const id = localStorage.getItem('userId')
+  console.log(id);
   
-  `
+  axios.put(`https://677cdbc74496848554c7efdb.mockapi.io/api/v1/users/${id}`, {
+    score: localStorage.getItem("userScore"),
+  });
 }
