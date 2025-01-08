@@ -1,3 +1,9 @@
+.asosiy{
+  display: flex;
+
+}
+
+
 .containers{
   display: flex;
   justify-content: center;
@@ -87,6 +93,11 @@ img {
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.option:hover{
+  background-color: rgb(225, 186, 10);
+
 }
 
 .option.correct {

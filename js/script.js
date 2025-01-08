@@ -142,10 +142,13 @@ startQuizBtn.addEventListener("click", () => {
 });
 
 function results() {
-  const id = localStorage.getItem('userId')
-  console.log(id);
-  
-  axios.put(`https://677cdbc74496848554c7efdb.mockapi.io/api/v1/users/${id}`, {
-    score: localStorage.getItem("userScore"),
-  });
+  const name = localStorage.getItem("name");
+  console.log(name);
+
+  axios.put(
+    `https://677cdbc74496848554c7efdb.mockapi.io/api/v1/users/${name}`,
+    {
+      score: localStorage.getItem("userScore"),
+    }
+  );
 }

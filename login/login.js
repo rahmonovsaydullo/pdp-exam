@@ -8,25 +8,50 @@ const nextPage = () => {
     if (!userName) {
       return;
     }
+
     localStorage.setItem("name", userName);
-    //   window.location.href = "../index.html";
-   if( axios
-    .post(`https://677cdbc74496848554c7efdb.mockapi.io/api/v1/users`, {
-      name: userName,
-      score: null,
-    })
-    .then((res) => {
-      const userData = res.data;
-      console.log(res.data.id);
-      localStorage.setItem("userId", res.data.id);
-      console.log(localStorage.getItem("userId"));
-      
-    })){
 
-   }
+    axios
+      .get(`https://677cdbc74496848554c7efdb.mockapi.io/api/v1/users`)
+      .then((res) => {
+        const users = res.data;
+
+        if (users.length == 0) {
+          axios.post(
+            `https://677cdbc74496848554c7efdb.mockapi.io/api/v1/users`,
+            {
+              name: localStorage.getItem("name"),
+             score: 0,
+            }
+          );
+          console.log(1);
+        } else if (
+          users.some((user) => user.name === localStorage.getItem("name"))
+        ) {
+          console.log("This user exist");
+          return;
+        } else {
+          axios.post(
+            `https://677cdbc74496848554c7efdb.mockapi.io/api/v1/users`,
+            {
+              name: localStorage.getItem("name"),
+            score: 0,
+            }
+          );
+          console.log(3);
+        }
+      })
+      .then(() => {
+        setTimeout(() => {
+          window.location.href = `../index.html`;
+        }, 500);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    loginInp.value = ""; // Clear the input
   });
-
-  loginInp.value = "";
 };
 
 nextPage();
