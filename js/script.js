@@ -1,25 +1,34 @@
 const main = document.getElementById("main");
-const nextCountryBtn = document.getElementById("next-country");
+const startQuizBtn = document.getElementById("start-quiz");
+const userName = document.getElementById("login-input");
+const loginBtn = document.getElementById("login-btn");
 
-
-
-
-
-
-let timeValue = 20;
-let questionIndex = 0;
-let questionNumber = 1;
-let userScore = 0;
+let time = 5; // Timer duration
+let questionIndex = 0; // Track the current question
+let questionNumber = 1; // Track the question number
+let userScore = 0; // User score
+let timerInterval; // Timer interval
+let optionList;
+let totalQuestions = 10; // Total number of questions
+let numberOfQuestion = totalQuestions;
 
 const fetchCountries = async () => {
   try {
-    const response = await axios.get(
-      `https://restcountries.com/v3.1/all?limit=10`
-    );
+    const response = await axios.get(`https://restcountries.com/v3.1/all`);
     const resData = response.data;
+
+    if (totalQuestions <= 0) {
+      results()
+      return
+    }
+    totalQuestions--;
+
+    console.log(totalQuestions);
 
     // Clear previous question
     main.innerHTML = "";
+    clearInterval(timerInterval);
+
     const randomIndex = Math.floor(Math.random() * resData.length);
     const randomCountry = resData[randomIndex];
 
@@ -30,8 +39,7 @@ const fetchCountries = async () => {
     // Add another 3 incorrect answers
     while (options.length < 4) {
       const randomOptionIndex = Math.floor(Math.random() * resData.length);
-      const randomOptionCountry = resData[randomOptionIndex];
-      const randomOptionCapital = randomOptionCountry.capital?.[0];
+      const randomOptionCapital = resData[randomOptionIndex].capital?.[0];
       if (randomOptionCapital && !options.includes(randomOptionCapital)) {
         options.push(randomOptionCapital);
       }
@@ -58,13 +66,15 @@ const fetchCountries = async () => {
                 </div>
             </div>
         </div>
+        <div class="timer">⏳ <span id="timer">${time}</span> seconds</div>
     `;
+    optionList = options;
 
     // Add event listeners to options
     const optionElements = document.querySelectorAll(".option");
     optionElements.forEach((option) => {
       option.addEventListener("click", () => {
-        // Remove any existing styles
+        clearInterval(timerInterval);
         optionElements.forEach((opt) =>
           opt.classList.remove("correct", "incorrect")
         );
@@ -72,37 +82,61 @@ const fetchCountries = async () => {
         // Check the selected answer
         if (option.textContent.trim() === correctAnswer) {
           option.classList.add("correct");
+          userScore++;
         } else {
           option.classList.add("incorrect");
 
-          // Highlight the correct answer
+          // Show the correct answer
           optionElements.forEach((opt) => {
             if (opt.textContent.trim() === correctAnswer) {
               opt.classList.add("correct");
             }
           });
         }
+
+        setTimeout(fetchCountries, 1000);
       });
     });
+
+    // Start the timer
+    startTimer(correctAnswer, optionElements);
   } catch (error) {
     console.log(error);
   }
 };
 
+const startTimer = (correctAnswer, optionElements) => {
+  let timeLeft = time;
+  const timerDisplay = document.getElementById("timer");
+  timerDisplay.innerText = timeLeft;
+
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    timerDisplay.textContent = timeLeft;
+
+    if (timeLeft <= 0) {
+      clearInterval(timerInterval);
+      optionElements.forEach((option) => {
+        if (option.textContent.trim() === correctAnswer) {
+          option.classList.add("correct");
+        } else {
+          option.classList.add("incorrect");
+        }
+      });
+
+      setTimeout(fetchCountries, 1000);
+    }
+  }, 1000);
+};
+
+startQuizBtn.addEventListener("click", () => {
+  fetchCountries();
+  startQuizBtn.classList.add('hide')
+});
 
 
-
-function startQuiz(){
+function results (){
+  main.innerHTML=`
   
+  `
 }
-// Fetch a new country on button click
-nextCountryBtn.addEventListener("click", () => {
-  fetchCountries();
-});
-
-const userName = document.getElementById("login-input");
-const loginBtn = document.getElementById("login-btn");
-
-loginBtn.addEventListener("click", () => {
-  fetchCountries();
-});
