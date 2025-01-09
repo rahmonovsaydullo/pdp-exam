@@ -38,7 +38,7 @@ const nextPage = () => {
             score: 0,
             }
           );
-          console.log(3);
+          console.log('Found');
         }
       })
       .then(() => {

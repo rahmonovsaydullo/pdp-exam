@@ -9,7 +9,7 @@ let questionNumber = 1; // Track the question number
 let userScore = 0; // User score
 let timerInterval; // Timer interval
 let optionList;
-let totalQuestions = 10; // Total number of questions
+let totalQuestions = 3; // Total number of questions
 let numberOfQuestion = totalQuestions;
 
 const fetchCountries = async () => {
@@ -19,6 +19,7 @@ const fetchCountries = async () => {
 
     if (totalQuestions <= 0) {
       results();
+      displayResult();
       return;
     }
     totalQuestions--;
@@ -51,9 +52,9 @@ const fetchCountries = async () => {
     // Create the question and options
     main.innerHTML += `
         <div class='box'>
-            <img src="${randomCountry.flags.png}" alt="The flag of ${
-      randomCountry.name.official
-    }">
+            <img class='country-flag' src="${
+              randomCountry.flags.png
+            }" alt="The flag of ${randomCountry.name.official}">
             <h4>${randomCountry.name.official}</h4>
             <div>
                 <div>What is the capital of ${
@@ -131,7 +132,7 @@ const startTimer = (correctAnswer, optionElements) => {
         }
       });
 
-      setTimeout(fetchCountries, 1000);
+      setTimeout(fetchCountries, 3000);
     }
   }, 1000);
 };
@@ -143,12 +144,43 @@ startQuizBtn.addEventListener("click", () => {
 
 function results() {
   const name = localStorage.getItem("name");
-  console.log(name);
+  const userScore = localStorage.getItem("userScore");
 
-  axios.put(
-    `https://677cdbc74496848554c7efdb.mockapi.io/api/v1/users/${name}`,
-    {
-      score: localStorage.getItem("userScore"),
-    }
-  );
+  axios
+    .get(
+      `https://677cdbc74496848554c7efdb.mockapi.io/api/v1/users?name=${name}`
+    )
+    .then((res) => {
+      if (res.data.length > 0) {
+        const userId = res.data[0].id;
+        localStorage.setItem("userIdRes", userId);
+
+        return axios.put(
+          `https://677cdbc74496848554c7efdb.mockapi.io/api/v1/users/${userId}`,
+          {
+            score: userScore,
+          }
+        );
+      } else console.log("Not found");
+    });
+}
+
+function displayResult() {
+  const userIdRes = localStorage.getItem("userIdRes");
+  axios
+    .get(
+      `https://677cdbc74496848554c7efdb.mockapi.io/api/v1/users/${userIdRes}`
+    )
+    .then((res) => {
+      const data = res.data;
+      console.log(data);
+      main.innerHTML = `
+       <div>
+       <h3>🎉 Congratulations ${data.name} 🎉 </h3>
+       <p>Your score is ${data.score}</p>
+       </div>
+
+       <button onclick='fetchCountries()'>Play again</button>
+      `;
+    });
 }

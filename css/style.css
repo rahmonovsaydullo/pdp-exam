@@ -1,22 +1,39 @@
-.asosiy{
-  display: flex;
-
+body {
+  overflow-y: hidden;
 }
 
-
-.containers{
+.containers {
   display: flex;
   justify-content: center;
   align-content: center;
-  flex-direction: column;
-  position: relative; 
-  height: 100vh; 
+  /* flex-direction: column; */
+  position: relative;
+  height: 100vh;
   background-color: #f4f4f4;
+}
+
+header {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+  background-color: rgb(231, 231, 231);
+  right: 20px;
+}
+
+.top-players{
+  text-decoration: none;
+  color: black;
+}
+
+h2{
+  padding: 10px 20px 10px 0px;
 }
 
 .btn {
   position: absolute;
-  top: 50%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 10px 20px;
@@ -29,7 +46,7 @@
   transition: transform 0.2s ease;
 }
 
-.login-from{
+.login-from {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -39,15 +56,11 @@
   margin-top: 20%;
 }
 
-
-capital-options
-
-
-.hide-questions{
+capital-options .hide-questions {
   display: none;
 }
 
-.hide{
+.hide {
   display: none;
 }
 
@@ -68,7 +81,7 @@ capital-options
   /* margin-top: 20px; */
 }
 
-img {
+.country-flag {
   width: 500px;
   height: 350px;
   object-fit: cover;
@@ -80,7 +93,6 @@ img {
   gap: 30px;
   margin-top: 20px;
 }
-
 
 .option {
   width: 400px;
@@ -95,19 +107,16 @@ img {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.option:hover{
+.option:hover {
   background-color: rgb(225, 186, 10);
-
 }
 
 .option.correct {
-  background-color: #4caf50; 
+  background-color: #4caf50;
   color: white;
 }
 
 .option.incorrect {
-  background-color: #f44336; 
+  background-color: #f44336;
   color: white;
 }
-
-
