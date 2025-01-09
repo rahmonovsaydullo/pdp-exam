@@ -64,12 +64,16 @@
     margin-top: 20%;
   }
   
-  capital-options .hide-questions {
+  .capital-options .hide-questions {
     display: none;
   }
   
   .hide {
     display: none;
+  }
+
+  .country-flag{
+    background-color: white;
   }
   
   #main {

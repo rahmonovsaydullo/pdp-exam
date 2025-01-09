@@ -11,7 +11,7 @@ let questionNumber = 1; // Track the question number
 let userScore = 0; // User score
 let timerInterval; // Timer interval
 let optionList; // Options listf
-let totalQuestions = 2; // Total number of questions
+let totalQuestions = 10; // Total number of questions
 let numberOfQuestion = totalQuestions;
 
 // Fetch all countries
@@ -58,7 +58,7 @@ const fetchCountries = async () => {
     main.innerHTML += `
         <div class='box'>
             <img class='country-flag' src="${
-              randomCountry.flags.png
+              randomCountry.flags.svg || randomCountry.flags.png 
             }" alt="The flag of ${randomCountry.name.official}">
             <h4 class="name-of-country">${randomCountry.name.official}</h4>
             <div>
