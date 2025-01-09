@@ -1,3 +1,4 @@
+// Select elements from HTML
 const main = document.getElementById("main");
 const startQuizBtn = document.getElementById("start-quiz");
 const userName = document.getElementById("login-input");
@@ -9,7 +10,7 @@ let questionIndex = 0; // Track the current question
 let questionNumber = 1; // Track the question number
 let userScore = 0; // User score
 let timerInterval; // Timer interval
-let optionList;
+let optionList; // Options list
 let totalQuestions = 2; // Total number of questions
 let numberOfQuestion = totalQuestions;
 
@@ -18,7 +19,7 @@ const fetchCountries = async () => {
   try {
     const response = await axios.get(`https://restcountries.com/v3.1/all`);
     const resData = response.data;
-
+    // Check question if run out of question next function will be work
     if (totalQuestions <= 0) {
       results();
       displayResult();
@@ -33,11 +34,11 @@ const fetchCountries = async () => {
     // Clear previous question
     main.innerHTML = "";
     clearInterval(timerInterval);
-
+    // Get random country
     const randomIndex = Math.floor(Math.random() * resData.length);
     const randomCountry = resData[randomIndex];
 
-    // Correct answer
+    // Define correct answer
     const correctAnswer = randomCountry.capital?.[0];
     const options = [correctAnswer];
 
@@ -75,7 +76,7 @@ const fetchCountries = async () => {
     `;
     optionList = options;
 
-    // Add event listeners to options
+    // Remove styles from options for next question
     const optionElements = document.querySelectorAll(".option");
     optionElements.forEach((option) => {
       option.addEventListener("click", () => {
@@ -99,18 +100,16 @@ const fetchCountries = async () => {
             }
           });
         }
-
         setTimeout(fetchCountries, 1000);
       });
     });
 
-    // Start the timer
     startTimer(correctAnswer, optionElements);
   } catch (error) {
     main.innerHTML = `<p>Failed to load data</p>`;
   }
 };
-
+// Start the timer
 const startTimer = (correctAnswer, optionElements) => {
   let timeLeft = time;
   const timerDisplay = document.getElementById("timer");
@@ -144,7 +143,7 @@ startQuizBtn.addEventListener("click", () => {
   startQuizBtn.classList.add("hide");
   header.classList.add("hide");
 });
-
+//  Update results end of quiz
 function results() {
   const name = localStorage.getItem("name");
   const userScore = localStorage.getItem("userScore");
@@ -161,7 +160,7 @@ function results() {
       if (res.data.length > 0) {
         const userId = res.data[0].id;
         localStorage.setItem("userIdRes", userId);
-
+        // Checks score if last score is higher than previous score then update
         if (res.data[0].score < userScore) {
           return axios.put(
             `https://677cdbc74496848554c7efdb.mockapi.io/api/v1/users/${userId}`,
@@ -173,7 +172,7 @@ function results() {
       } else console.log("Not found");
     });
 }
-
+// Display quiz results
 function displayResult() {
   const userIdRes = localStorage.getItem("userIdRes");
   axios
@@ -203,7 +202,7 @@ function displayResult() {
       `;
     });
 }
-
+// Play again question
 function replayQuiz() {
   totalQuestions = numberOfQuestion;
   userScore = 0;
