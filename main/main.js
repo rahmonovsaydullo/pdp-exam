@@ -10,7 +10,7 @@ let questionIndex = 0; // Track the current question
 let questionNumber = 1; // Track the question number
 let userScore = 0; // User score
 let timerInterval; // Timer interval
-let optionList; // Options list
+let optionList; // Options listf
 let totalQuestions = 2; // Total number of questions
 let numberOfQuestion = totalQuestions;
 
@@ -154,9 +154,6 @@ function results() {
     )
     .then((res) => {
       console.log(res);
-
-      console.log(res.data[0].score);
-
       if (res.data.length > 0) {
         const userId = res.data[0].id;
         localStorage.setItem("userIdRes", userId);
@@ -181,7 +178,6 @@ function displayResult() {
     )
     .then((res) => {
       const data = res.data;
-      console.log(data);
       let higherScore;
       if (userScore >= 7) {
         higherScore = "Nobody can't stop you. 🥳🤩";
