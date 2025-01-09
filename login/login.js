@@ -6,6 +6,7 @@ const nextPage = () => {
     const userName = loginInp.value.trim();
 
     if (!userName) {
+      alert('Enter username')
       return;
     }
 

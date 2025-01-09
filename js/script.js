@@ -2,16 +2,19 @@ const main = document.getElementById("main");
 const startQuizBtn = document.getElementById("start-quiz");
 const userName = document.getElementById("login-input");
 const loginBtn = document.getElementById("login-btn");
+const header = document.querySelector("header");
 
-let time = 15; // Timer duration
+let time = 15; // Time duration
 let questionIndex = 0; // Track the current question
 let questionNumber = 1; // Track the question number
 let userScore = 0; // User score
 let timerInterval; // Timer interval
 let optionList;
-let totalQuestions = 3; // Total number of questions
+let totalQuestions = 2; // Total number of questions
 let numberOfQuestion = totalQuestions;
 
+
+// Fetch all countries
 const fetchCountries = async () => {
   try {
     const response = await axios.get(`https://restcountries.com/v3.1/all`);
@@ -20,6 +23,8 @@ const fetchCountries = async () => {
     if (totalQuestions <= 0) {
       results();
       displayResult();
+      header.classList.remove("hide");
+
       return;
     }
     totalQuestions--;
@@ -55,9 +60,9 @@ const fetchCountries = async () => {
             <img class='country-flag' src="${
               randomCountry.flags.png
             }" alt="The flag of ${randomCountry.name.official}">
-            <h4>${randomCountry.name.official}</h4>
+            <h4 class="name-of-country">${randomCountry.name.official}</h4>
             <div>
-                <div>What is the capital of ${
+                <div class="question-of-country">What is the capital of ${
                   randomCountry.name.official
                 }?</div>
                 <div class='capital-options'>
@@ -103,7 +108,7 @@ const fetchCountries = async () => {
     // Start the timer
     startTimer(correctAnswer, optionElements);
   } catch (error) {
-    console.log(error);
+   main.innerHTML = `<p>Failed to load data</p>`
   }
 };
 
@@ -122,13 +127,11 @@ const startTimer = (correctAnswer, optionElements) => {
     updateTimer();
 
     if (timeLeft <= 0) {
-      timeLeft < 10 ? timerDisplay.textContent + "0" : timerDisplay.textContent;
+      updateTimer();
       clearInterval(timerInterval);
       optionElements.forEach((option) => {
         if (option.textContent.trim() === correctAnswer) {
           option.classList.add("correct");
-        } else {
-          option.classList.add("incorrect");
         }
       });
 
@@ -140,6 +143,7 @@ const startTimer = (correctAnswer, optionElements) => {
 startQuizBtn.addEventListener("click", () => {
   fetchCountries();
   startQuizBtn.classList.add("hide");
+  header.classList.add("hide");
 });
 
 function results() {
@@ -151,16 +155,22 @@ function results() {
       `https://677cdbc74496848554c7efdb.mockapi.io/api/v1/users?name=${name}`
     )
     .then((res) => {
+      console.log(res);
+
+      console.log(res.data[0].score);
+
       if (res.data.length > 0) {
         const userId = res.data[0].id;
         localStorage.setItem("userIdRes", userId);
 
-        return axios.put(
-          `https://677cdbc74496848554c7efdb.mockapi.io/api/v1/users/${userId}`,
-          {
-            score: userScore,
-          }
-        );
+        if (res.data[0].score < userScore) {
+          return axios.put(
+            `https://677cdbc74496848554c7efdb.mockapi.io/api/v1/users/${userId}`,
+            {
+              score: userScore,
+            }
+          );
+        } else return;
       } else console.log("Not found");
     });
 }
@@ -174,13 +184,33 @@ function displayResult() {
     .then((res) => {
       const data = res.data;
       console.log(data);
+      let higherScore;
+      if (userScore >= 7) {
+        higherScore = "Nobody can't stop you. 🥳🤩";
+      } else if (userScore < 7 && userScore > 3) {
+        higherScore = "Next time you can find all 🤓";
+      } else if (userScore <= 3) {
+        higherScore = "Did you know what is geography 🤥";
+      }
       main.innerHTML = `
-       <div>
+       <div class='result-section'>
+       <p>Your best score is ${data.score}</p>
        <h3>🎉 Congratulations ${data.name} 🎉 </h3>
-       <p>Your score is ${data.score}</p>
+       <p>Your score is ${userScore}</p>
+       <h2>${higherScore}</h2>
        </div>
 
-       <button onclick='fetchCountries()'>Play again</button>
+       <button class='btn-res' onclick='replayQuiz()'>Play again</button>
       `;
     });
+}
+
+function replayQuiz() {
+  totalQuestions = numberOfQuestion;
+  userScore = 0;
+  localStorage.setItem("userScore", userScore);
+
+  main.innerHTML = "";
+  fetchCountries();
+  header.classList.add("hide");
 }

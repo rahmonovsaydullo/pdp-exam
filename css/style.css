@@ -1,16 +1,28 @@
-body {
-  overflow-y: hidden;
-}
-
 .containers {
   display: flex;
   justify-content: center;
-  align-content: center;
-  /* flex-direction: column; */
+  align-items: center;
   position: relative;
   height: 100vh;
-  background-color: #f4f4f4;
+ 
+
+  /* Enable background blur */
+
+  backdrop-filter: blur(10px);
+
 }
+
+body {
+  margin: 0;
+  overflow-y: hidden;
+  background-image: url("https://static.vecteezy.com/system/resources/previews/003/206/208/non_2x/quiz-time-neon-signs-style-text-free-vector.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  backdrop-filter: blur(20px);
+
+}
+
 
 header {
   display: flex;
@@ -18,16 +30,16 @@ header {
   align-items: center;
   width: 100%;
   height: 50px;
-  background-color: rgb(231, 231, 231);
+  background-color: rgb(8, 143, 201);
   right: 20px;
 }
 
-.top-players{
+.top-players {
   text-decoration: none;
   color: black;
 }
 
-h2{
+h2 {
   padding: 10px 20px 10px 0px;
 }
 
@@ -87,6 +99,14 @@ capital-options .hide-questions {
   object-fit: cover;
 }
 
+.name-of-country, .question-of-country{
+  color: rgb(255, 255, 255);
+  padding: 20px;
+  font-size: 25px;
+}
+
+
+
 .capital-options {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -97,12 +117,15 @@ capital-options .hide-questions {
 .option {
   width: 400px;
   height: 100px;
+  color: white;
   display: flex;
+  font-size: 20px;
   justify-content: start;
   align-items: center;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  background-color: rgba(37, 131, 155, 0.719);
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
@@ -113,10 +136,29 @@ capital-options .hide-questions {
 
 .option.correct {
   background-color: #4caf50;
-  color: white;
+  color: rgb(0, 0, 0);
 }
 
 .option.incorrect {
   background-color: #f44336;
   color: white;
+}
+
+
+.timer{
+  font-size: 26px;
+  color: white;
+  background-color: black;
+}
+
+.result-section{
+  background-color: #08a6c5e6;
+border-radius: 20px;
+  padding: 30px;
+}
+
+.btn-res{
+ padding: 20px;
+ border-radius: 10px;
+ background-color:royalblue;
 }

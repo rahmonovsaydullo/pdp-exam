@@ -1,0 +1,36 @@
+body {
+  background: url("https://media.istockphoto.com/id/1339908748/vector/new-realistic-neon-sign-of-quiz-frame-logo-for-decoration-and-covering-on-the-dark-wall.jpg?s=612x612&w=0&k=20&c=Qn97UPTD2E-MXDC9khiDW9vQglFtjNCFvCtF0EkiDP8=");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  backdrop-filter: blur(10px);
+  height: 100vh;
+}
+header {
+  display: flex;
+  align-items: center;
+  left: 30px;
+  color: black;
+  height: 50px;
+  width: 100%;
+  padding: 10px;
+  background-color: aliceblue;
+}
+
+h2 {
+  padding: 10px 20px 10px 0px;
+}
+
+h3 {
+  color: white;
+  font-size: 30px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a.hover {
+}
