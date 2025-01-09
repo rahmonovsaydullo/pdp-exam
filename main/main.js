@@ -11,7 +11,7 @@ let userScore = 0; // User score
 let timerInterval; // Timer interval
 let optionList;
 let totalQuestions = 2; // Total number of questions
-// let numberOfQuestion = totalQuestions;
+let numberOfQuestion = totalQuestions;
 
 // Fetch all countries
 const fetchCountries = async () => {
