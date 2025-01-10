@@ -20,6 +20,13 @@
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="rank.css" />
     <script src="rank.js" defer></script>
@@ -27,11 +34,11 @@
   <body>
     <main>
       <header>
-        <a href="../main/main.html"><h2>Play quiz</h2></a>
+        <a href="../main/main.html"><button  class="d-flex btn btn-dark"><i class="fas me-2 fa-2x fa-arrow-left "></i><h4>Play Quiz</h4> </button></a>
       </header>
       <div class="container">
-        <h3>Top players</h3>
-        <table class="table table-bordered">
+        <h1 class="m-5 text-center top-players-text"><i class="fas fa-crown me-2"></i> Top players</h1>
+        <table class="table table-bordered table-dark">
           <thead>
             <th>N/o</th>
             <th>Player name</th>

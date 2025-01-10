@@ -6,8 +6,8 @@ const loginBtn = document.getElementById("login-btn");
 const header = document.querySelector("header");
 
 let time = 15; // Time duration
-let questionIndex = 0; // Track the current question
-let questionNumber = 1; // Track the question number
+let questionIndex = 1; // Track the current question
+// let questionNumber = 1; // Track the question number
 let userScore = 0; // User score
 let timerInterval; // Timer interval
 let optionList; // Options listf
@@ -56,23 +56,25 @@ const fetchCountries = async () => {
 
     // Create the question and options
     main.innerHTML += `
+      <div class='number-of-question'>Question ${questionIndex++} of 10</div>
+
+    <div id='questionNumber'>${totalQuestions}</div>
         <div class='box'>
             <img class='country-flag' src="${
-              randomCountry.flags.svg || randomCountry.flags.png 
+              randomCountry.flags.svg || randomCountry.flags.png
             }" alt="The flag of ${randomCountry.name.official}">
-            <h4 class="name-of-country">${randomCountry.name.official}</h4>
             <div>
                 <div class="question-of-country">What is the capital of ${
                   randomCountry.name.official
                 }?</div>
                 <div class='capital-options'>
                     ${options
-                      .map((option) => `<div class="option">${option}</div>`)
+                      .map((option) => `<div class="option ">${option}</div>`)
                       .join("")}
                 </div>
             </div>
         </div>
-        <div class="timer">⏳ <span id="timer">${time}</span> seconds</div>
+        <div class="timer"><span id="timer-icon">⏳</span> <span id="timer">${time}</span> seconds</div>
     `;
     optionList = options;
 
@@ -143,38 +145,60 @@ startQuizBtn.addEventListener("click", () => {
   startQuizBtn.classList.add("hide");
   header.classList.add("hide");
 });
+
+let userFiltered;
+const getName = () => {
+  axios
+    .get(`https://677cdbc74496848554c7efdb.mockapi.io/api/v1/users`)
+    .then((res) => {
+      const users = res.data;
+      let userInfo = users.filter((user) => {
+        return user.name === localStorage.getItem("name");
+      });
+      userFiltered = userInfo;
+      console.log("userFiltered");
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+  getName();
+});
+
 //  Update results end of quiz
 function results() {
-  const name = localStorage.getItem("name");
-  const userScore = localStorage.getItem("userScore");
+  const previousBestScore = parseInt(userFiltered[0].score); // Get the user's previous best score
+  console.log(previousBestScore);
 
-  axios
-    .get(
-      `https://677cdbc74496848554c7efdb.mockapi.io/api/v1/users?name=${name}`
-    )
-    .then((res) => {
-      console.log(res);
-      if (res.data.length > 0) {
-        const userId = res.data[0].id;
-        localStorage.setItem("userIdRes", userId);
-        // Checks score if last score is higher than previous score then update
-        if (res.data[0].score < userScore) {
-          return axios.put(
-            `https://677cdbc74496848554c7efdb.mockapi.io/api/v1/users/${userId}`,
-            {
-              score: userScore,
-            }
-          );
-        } else return;
-      } else console.log("Not found");
-    });
+  let recentScore = localStorage.getItem("userScore");
+  console.log(recentScore);
+  
+  if (recentScore > previousBestScore) {
+    axios
+      .put(
+        `https://677cdbc74496848554c7efdb.mockapi.io/api/v1/users/${userFiltered[0].id}`,
+        {
+          score: userScore,
+        }
+      )
+      .then(() => {
+        displayResult(); // Display the updated results
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  } else {
+    displayResult(); // Display the results without updating the score
+  }
 }
+
 // Display quiz results
 function displayResult() {
-  const userIdRes = localStorage.getItem("userIdRes");
   axios
     .get(
-      `https://677cdbc74496848554c7efdb.mockapi.io/api/v1/users/${userIdRes}`
+      `https://677cdbc74496848554c7efdb.mockapi.io/api/v1/users/${userFiltered[0].id}`
     )
     .then((res) => {
       const data = res.data;
@@ -186,6 +210,7 @@ function displayResult() {
       } else if (userScore <= 3) {
         higherScore = "Did you know what is geography 🤥";
       }
+
       main.innerHTML = `
        <div class='result-section'>
        <p>Your best score is ${data.score}</p>
@@ -202,7 +227,7 @@ function displayResult() {
 function replayQuiz() {
   totalQuestions = numberOfQuestion;
   userScore = 0;
-  localStorage.setItem("userScore", userScore);
+
 
   main.innerHTML = "";
   fetchCountries();

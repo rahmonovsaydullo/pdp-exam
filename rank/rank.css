@@ -12,10 +12,30 @@ header {
   align-items: center;
   left: 30px;
   color: black;
-  height: 50px;
+  height: 70px;
   width: 100%;
   padding: 10px;
   background-color: aliceblue;
+}
+.top-players-text{
+  color: white;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+.fa-crown{
+  color: orange;
+}
+table{
+  border-radius: 10px;
+}
+thead{
+  text-align: center;
+  font-size: 24px;
+}
+td{
+  text-align: center;
+
+  font-size: 30px;
 }
 
 h2 {

@@ -17,6 +17,14 @@
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
     <link rel="shortcut icon" href="../assets/favicon.png" type="image/x-icon" />
     <link rel="stylesheet" href="main.css" />
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -25,12 +33,14 @@
   <body>
     <header>
       <a class="top-players" title="See top players" href="../rank/rank.html"
-        ><h2>Top players</h2></a
+        >
+        <button  class="d-flex btn btn-dark me-3"><h4>Top Players</h4><i class="fas ms-3 fa-arrow-right fa-2x   "></i> </button>
+        </a
       >
     </header>
     <div class="containers">
       <div id="main" class="hide-questions"></div>
-      <button class="btn btn-dark w-5" id="start-quiz">Start</button>
+      <button class="btn  start-btn btn-primary w-5" id="start-quiz"><i class="fas fa-play me-2    "></i> Start</button>
     </div>
   </body>
 </html>

@@ -1,165 +1,178 @@
 .containers {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    height: 100vh;
-    backdrop-filter: blur(10px);
-  
-  }
-  
-  body {
-    margin: 0;
-    overflow-y: hidden;
-    background-image: url("https://static.vecteezy.com/system/resources/previews/003/206/208/non_2x/quiz-time-neon-signs-style-text-free-vector.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    backdrop-filter: blur(20px);
-  
-  }
-  
-  
-  header {
-    display: flex;
-    justify-content: end;
-    align-items: center;
-    width: 100%;
-    height: 50px;
-    background-color: rgb(8, 143, 201);
-    right: 20px;
-  }
-  
-  .top-players {
-    text-decoration: none;
-    color: black;
-  }
-  
-  h2 {
-    padding: 10px 20px 10px 0px;
-  }
-  
-  .btn {
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 10px 20px;
-    font-size: 1rem;
-    color: white;
-    background-color: #4e54c8;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-  }
-  
-  .login-from {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-self: center;
-    gap: 20px;
-    margin: 0 auto;
-    margin-top: 20%;
-  }
-  
-  .capital-options .hide-questions {
-    display: none;
-  }
-  
-  .hide {
-    display: none;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 100vh;
+  backdrop-filter: blur(10px);
+}
 
-  .country-flag{
-    background-color: white;
-  }
-  
-  #main {
-    display: flex;
-    flex-direction: column !important;
-    flex-wrap: wrap !important;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
-  }
-  
-  .box {
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    align-items: center;
-    /* margin-top: 20px; */
-  }
-  
-  .country-flag {
-    width: 500px;
-    height: 350px;
-    object-fit: cover;
-  }
-  
-  .name-of-country, .question-of-country{
-    color: rgb(255, 255, 255);
-    padding: 20px;
-    font-size: 25px;
-  }
-  
-  
-  
-  .capital-options {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 30px;
-    margin-top: 20px;
-  }
-  
-  .option {
-    width: 400px;
-    height: 100px;
-    color: white;
-    display: flex;
-    font-size: 20px;
-    justify-content: start;
-    align-items: center;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: rgba(37, 131, 155, 0.719);
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
-  
-  .option:hover {
-    background-color: rgb(225, 186, 10);
-  }
-  
-  .option.correct {
-    background-color: #4caf50;
-    color: rgb(0, 0, 0);
-  }
-  
-  .option.incorrect {
-    background-color: #f44336;
-    color: white;
-  }
-  
-  
-  .timer{
-    font-size: 26px;
-    color: white;
-    background-color: black;
-  }
-  
-  .result-section{
-    background-color: #08a6c5e6;
+body {
+  margin: 0;
+  overflow-y: hidden;
+  background-image: url("https://static.vecteezy.com/system/resources/previews/003/206/208/non_2x/quiz-time-neon-signs-style-text-free-vector.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  backdrop-filter: blur(20px);
+}
+
+header {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  width: 100%;
+  height: 70px;
+  background-color: rgb(8, 143, 201);
+  right: 20px;
+
+}
+
+.number-of-question{
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  font-size: 20px;
+  background-color: white;
+  padding: 20px;
+  font-weight: bold;
+}
+
+.top-players {
+  text-decoration: none;
+  color: black;
+}
+
+h2 {
+  padding: 10px 20px 10px 0px;
+}
+
+.start-btn {
+  width: 400px;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px 20px;
+  font-size:40px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.login-from {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: center;
+  gap: 20px;
+  margin: 0 auto;
+  margin-top: 20%;
+}
+
+.capital-options .hide-questions {
+  display: none;
+}
+
+.hide {
+  display: none;
+}
+
+.country-flag {
+  background-color: white;
+}
+
+#main {
+  display: flex;
+  flex-direction: column !important;
+  flex-wrap: wrap !important;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  padding: 30px;
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+margin-top: -20px;
+}
+
+.country-flag {
+  width: 500px;
+  height: 350px;
+  object-fit: cover;
+}
+
+.name-of-country,
+.question-of-country {
+  color: rgb(255, 255, 255);
+  padding:  0 20px ;
+  font-size: 25px;
+}
+
+.capital-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.option {
+  width: 400px;
+  height: 100px;
+  color: white;
+  display: flex;
+  font-size: 30px;
+  justify-content: start;
+  font-weight: 700;
+  text-align: center;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: rgb(37, 131, 155);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.option:hover {
+  background-color: rgb(225, 186, 10);
+}
+
+.option.correct {
+  background-color: #4caf50;
+}
+
+.option.incorrect {
+  background-color: #f44336;
+  color: white;
+}
+
+.timer {
+  font-size: 26px;
+  color: rgb(0, 0, 0);
+  padding: 10px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+}
+
+.result-section {
+  background-color: #08a6c5e6;
   border-radius: 20px;
-    padding: 30px;
-  }
-  
-  .btn-res{
-   padding: 20px;
-   border-radius: 10px;
-   background-color:royalblue;
-  }
-  
+  padding: 30px;
+}
+
+.btn-res {
+  padding: 20px;
+  border-radius: 10px;
+  background-color: royalblue;
+}
+
+.question-of-country{
+  font-size: 30px;
+}
