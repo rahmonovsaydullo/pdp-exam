@@ -4,7 +4,7 @@ const loginBtn = document.querySelector("button");
 
 loginBtn.addEventListener("click", () => {
   const userName = loginInp.value.trim();
-// Checks the input, if it 
+  // Checks the input, if it
   if (!userName) {
     alert("Enter username");
     return;
@@ -17,15 +17,13 @@ loginBtn.addEventListener("click", () => {
     .then((res) => {
       const users = res.data;
 
-      if (users.length == 0) {
+      if (!users.some((user) => user.name == localStorage.getItem("name"))) {
         axios.post(`https://677cdbc74496848554c7efdb.mockapi.io/api/v1/users`, {
           name: localStorage.getItem("name"),
           score: 0,
         });
         console.log(1);
-      } else if (
-        users.some((user) => user.name == localStorage.getItem("name"))
-      ) {
+
         console.log("This user exist");
         return;
       } else {
