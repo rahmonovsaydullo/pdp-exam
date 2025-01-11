@@ -11,7 +11,7 @@ let questionIndex = 1; // Track the current question
 let userScore = 0; // User score
 let timerInterval; // Timer interval
 let optionList; // Options listf
-let totalQuestions = 10; // Total number of questions
+let totalQuestions = 4; // Total number of questions
 let numberOfQuestion = totalQuestions;
 
 // Fetch all countries
@@ -29,7 +29,6 @@ const fetchCountries = async () => {
     }
     totalQuestions--;
 
-    console.log(totalQuestions);
 
     // Clear previous question
     main.innerHTML = "";
@@ -156,7 +155,6 @@ const getName = () => {
         return user.name === localStorage.getItem("name");
       });
       userFiltered = userInfo;
-      console.log("userFiltered");
     })
     .catch((error) => {
       console.log(error);
@@ -169,18 +167,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
 //  Update results end of quiz
 function results() {
-  const previousBestScore = parseInt(userFiltered[0].score); // Get the user's previous best score
-  console.log(previousBestScore);
+  let previousBestScore = parseInt(userFiltered[0].score); // Get the user's previous best score
+  console.log(previousBestScore,"old score");
 
   let recentScore = localStorage.getItem("userScore");
-  console.log(recentScore);
-  
+  console.log(recentScore,'new score');
+
   if (recentScore > previousBestScore) {
     axios
       .put(
         `https://677cdbc74496848554c7efdb.mockapi.io/api/v1/users/${userFiltered[0].id}`,
         {
-          score: userScore,
+          score: recentScore,
         }
       )
       .then(() => {
@@ -225,14 +223,10 @@ function displayResult() {
 }
 // Play again question
 function replayQuiz() {
-  totalQuestions = numberOfQuestion;
+  totalQuestions = numberOfQuestion ;
   userScore = 0;
-
 
   main.innerHTML = "";
   fetchCountries();
   header.classList.add("hide");
 }
-
-
-
