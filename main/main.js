@@ -11,7 +11,7 @@ let questionNumber = 1; // Track the question number
 let userScore = 0; // User score
 let timerInterval; // Timer interval
 let optionList; // Options listf
-let totalQuestions = 4; // Total number of questions
+let totalQuestions = 10; // Total number of questions
 let numberOfQuestion = totalQuestions;
 
 // Fetch all countries
@@ -54,7 +54,7 @@ const fetchCountries = async () => {
 
     // Create the question and options
     main.innerHTML += `
-      <div class='number-of-question'>Question ${questionIndex++} of 4</div>
+      <div class='number-of-question'>Question ${questionIndex++} of 10</div>
 
         <div class='box'>
             <img class='country-flag' src="${
@@ -229,3 +229,6 @@ function replayQuiz() {
   fetchCountries();
   header.classList.add("hide");
 }
+
+
+
