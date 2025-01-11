@@ -7,7 +7,7 @@ const header = document.querySelector("header");
 
 let time = 15; // Time duration
 let questionIndex = 1; // Track the current question
-// let questionNumber = 1; // Track the question number
+let questionNumber = 1; // Track the question number
 let userScore = 0; // User score
 let timerInterval; // Timer interval
 let optionList; // Options listf
@@ -28,7 +28,6 @@ const fetchCountries = async () => {
       return;
     }
     totalQuestions--;
-
 
     // Clear previous question
     main.innerHTML = "";
@@ -55,9 +54,8 @@ const fetchCountries = async () => {
 
     // Create the question and options
     main.innerHTML += `
-      <div class='number-of-question'>Question ${questionIndex++} of 10</div>
+      <div class='number-of-question'>Question ${questionIndex++} of 4</div>
 
-    <div id='questionNumber'>${totalQuestions}</div>
         <div class='box'>
             <img class='country-flag' src="${
               randomCountry.flags.svg || randomCountry.flags.png
@@ -168,10 +166,10 @@ document.addEventListener("DOMContentLoaded", () => {
 //  Update results end of quiz
 function results() {
   let previousBestScore = parseInt(userFiltered[0].score); // Get the user's previous best score
-  console.log(previousBestScore,"old score");
+  console.log(previousBestScore, "old score");
 
   let recentScore = localStorage.getItem("userScore");
-  console.log(recentScore,'new score');
+  console.log(recentScore, "new score");
 
   if (recentScore > previousBestScore) {
     axios
@@ -213,7 +211,7 @@ function displayResult() {
        <div class='result-section'>
        <p>Your best score is ${data.score}</p>
        <h3>🎉 Congratulations ${data.name} 🎉 </h3>
-       <p>Your score is ${userScore}</p>
+       <p>Your current score is ${userScore}</p>
        <h2>${higherScore}</h2>
        </div>
 
@@ -223,8 +221,9 @@ function displayResult() {
 }
 // Play again question
 function replayQuiz() {
-  totalQuestions = numberOfQuestion ;
+  totalQuestions = numberOfQuestion;
   userScore = 0;
+  questionIndex = 1;
 
   main.innerHTML = "";
   fetchCountries();
