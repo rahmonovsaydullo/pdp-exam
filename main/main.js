@@ -233,3 +233,6 @@ function replayQuiz() {
   fetchCountries();
   header.classList.add("hide");
 }
+
+
+
