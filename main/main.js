@@ -44,7 +44,7 @@ const fetchCountries = async () => {
     while (options.length < 4) {
       const randomOptionIndex = Math.floor(Math.random() * resData.length);
       const randomOptionCapital = resData[randomOptionIndex].capital?.[0];
-      if (randomOptionCapital && !options.includes(randomOptionCapital)) {
+      if (!randomCountry == undefined && randomOptionCapital && !options.includes(randomOptionCapital)) {
         options.push(randomOptionCapital);
       }
     }
