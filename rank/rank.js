@@ -3,7 +3,7 @@ const main = document.querySelector("main");
 const tableBody = document.querySelector("tbody");
 
 axios
-  .get(`https://677cdbc74496848554c7efdb.mockapi.io/api/v1/users`)
+  .get(`https://678937632c874e66b7d803d1.mockapi.io/api/v1/users`)
   .then((res) => {
     const resData = res.data;
     // Sort score via descending

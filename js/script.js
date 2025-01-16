@@ -31,7 +31,7 @@ loginBtn.addEventListener("click", () => {
         // console.log('this working');
         
         // axios.post(`https://677cdbc74496848554c7efdb.mockapi.io/api/v1/users`, {
-        //   // name: localStorage.getItem("name"),
+        //   name: localStorage.getItem("name"),
         //   score: 0,
         // });
 
