@@ -146,7 +146,7 @@ startQuizBtn.addEventListener("click", () => {
 let userFiltered;
 const getName = () => {
   axios
-    .get(`https://677cdbc74496848554c7efdb.mockapi.io/api/v1/users`)
+    .get(`https://678937632c874e66b7d803d1.mockapi.io/api/v1/users`)
     .then((res) => {
       const users = res.data;
       let userInfo = users.filter((user) => {
@@ -174,7 +174,7 @@ function results() {
   if (recentScore > previousBestScore) {
     axios
       .put(
-        `https://677cdbc74496848554c7efdb.mockapi.io/api/v1/users/${userFiltered[0].id}`,
+        `https://678937632c874e66b7d803d1.mockapi.io/api/v1/users/${userFiltered[0].id}`,
         {
           score: recentScore,
         }
@@ -194,7 +194,7 @@ function results() {
 function displayResult() {
   axios
     .get(
-      `https://677cdbc74496848554c7efdb.mockapi.io/api/v1/users/${userFiltered[0].id}`
+      `https://678937632c874e66b7d803d1.mockapi.io/api/v1/users/${userFiltered[0].id}`
     )
     .then((res) => {
       const data = res.data;
