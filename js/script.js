@@ -1,6 +1,7 @@
 // Select elements from HTML
 const loginInp = document.getElementById("login-input");
 const loginBtn = document.querySelector("button");
+const api = `https://678937632c874e66b7d803d1.mockapi.io/api/v1/users`
 
 loginBtn.addEventListener("click", () => {
   const userName = loginInp.value.trim();
@@ -13,12 +14,12 @@ loginBtn.addEventListener("click", () => {
   localStorage.setItem("name", userName);
 
   axios
-    .get(`https://677cdbc74496848554c7efdb.mockapi.io/api/v1/users`)
+    .get(api)
     .then((res) => {
       const users = res.data;
 
       if (!users.some((user) => user.name == localStorage.getItem("name"))) {
-        axios.post(`https://677cdbc74496848554c7efdb.mockapi.io/api/v1/users`, {
+        axios.post(api, {
           name: localStorage.getItem("name"),
           score: 0,
         });
